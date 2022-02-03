@@ -1,0 +1,20 @@
+{% extends "admin_base.njk"%}
+
+{% block titulo %}Administració{% endblock %}
+
+{% block contenido%}
+<h1 class="centrar">Pel·lícules</h1>
+<ul>
+    {% for pelicula in pelicules %}
+    <li class="mb-3">{{ pelicula.titol }} 
+        <a href="/admin/pelicules/editar/{{ pelicula.id }}" class="btn btn-primary mx-2">Editar</a>
+         <form action="/admin/pelicules/{{ pelicula.id }}" method="post" class="d-inline-block">
+            <input type="hidden" name="_method" value="delete" />
+            <button type="submit" class="btn btn-danger">
+                Borrar
+            </button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

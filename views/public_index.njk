@@ -1,0 +1,15 @@
+{% extends "public_base.njk"%}
+
+{% block titulo %}Pelicules{% endblock %}
+
+{% block contenido%}
+<h1 class="centrar">Pel·licules</h1>
+<ul>
+    {% for pelicula in pelicules %}
+    <li class="mb-3">{{ pelicula.titol | upper }} <a href="pelicula/{{ pelicula.id }}" class="btn btn-success mx-2">Ver Pel·lícula</a></li>
+    {% endfor %}
+</ul>
+{% if missatge %}
+<p class="centrar">{{ missatge }}</p>
+{% endif %}
+{% endblock %}

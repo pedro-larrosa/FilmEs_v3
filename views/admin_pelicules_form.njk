@@ -1,0 +1,88 @@
+{% extends "admin_base.njk"%}
+
+{% block titulo %}
+{% if pelicula %}
+    Administració | Editar {{ pelicula.titol }}
+{% else %}
+    Administració | Nova pel·lícula
+{% endif %}
+{% endblock %}
+
+{% block contenido%}
+{% if pelicula %}
+    <h1>Editar {{ pelicula.titol }}</h1>
+{% else %}
+    <h1>Inserció de nova pel·lícula</h1>
+{% endif %}
+
+<form action="/admin/pelicules{% if pelicula %}/{{ pelicula.id }}?_method=PUT{% endif %}" method="POST"  enctype="multipart/form-data">
+    {% if pelicula %}
+        <input type="hidden" name="_method" value="put" />
+    {% endif %}
+    <div class="form-group mb-3">
+        <label for="titol"> Titol:</label>
+        <input required type="text" class="form-control" id="titol" name="titol" minlength="2"
+                placeholder="Títol de la pel·lícula..." value="{{ pelicula.titol }}"/>
+    </div>
+    <div class="form-group mb-3">
+        <label for="sinopsis"> Sinopsis:</label>
+        <textarea required class="form-control" id="sinopsis" name="sinopsis" minlength="10"
+                placeholder="Sinopsis de la pel·lícula..." >{{ pelicula.sinopsis }}</textarea>
+    </div>
+    <div class="form-group mb-3">
+        <label for="duracio"> Duració:</label>
+        <input required type="number" class="form-control" id="duracio" name="duracio" min="0"
+                placeholder="Duració de la pel·lícula..." value="{{ pelicula.duracio }}" />
+    </div>
+    <div class="form-group mb-3">
+        <label for="genere"> Genere:</label>
+        <select required name="genere" class="form-select">
+            {% for genere in generes %}
+            <option value="{{ genere }}"
+            {% if pelicula.genere == genere %}selected{% endif %}
+            >{{ genere | capitalize }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group mb-3">
+        <label for="imathe"> Imatge:</label>
+        <input type="file" class="form-control" id="imatge" name="imatge" />
+    </div>
+    <div class="form-group mb-3">
+        <label for="valoracio"> Valoració:</label><br/>
+        {% for num in [0, 1, 2, 3, 4, 5] %}
+        <input class="form-check-input" type="radio" value="{{ num }}" name="valoracio" id="{{ num }}" {% if pelicula.valoracio == num %}checked{% endif %}/>
+          <label for="{{ num }}" class="form-check-label">{{ num }}</label><br />
+        {% endfor %}
+    </div>
+    <div class="form-group mb-3">
+        <label for="director"> Director:</label>
+        <select required name="director" class="form-select">
+            {% for director in directors %}
+                <option value="{{ director.id }}" 
+                {% if pelicula.director.id == director.id %}selected{% endif %}>
+                {{ director.nom }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group mb-3">
+        <label for="plataformes"> Plataformes: </label>
+        <select name="plataformes" class="form-select mb-3" multiple id="plataformes">
+            {% for plataforma in plataformes %}
+                <option value="{{ plataforma }}"
+                {% for plat in pelicula.plataformes %}
+                {% if plat.nom == plataforma %}selected{% endif %}
+                {% endfor %}
+                >
+                {{ plataforma }}</option>
+            {% endfor %}
+        </select>
+        <button id="quitarPlataformes" class="btn btn-danger">Quitar plataformes</button>
+    </div>
+    {% if pelicula %}
+        <button type="submit" class="btn btn-primary">Editar</button>
+    {% else %}
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    {% endif %}
+</form>
+{% endblock %}

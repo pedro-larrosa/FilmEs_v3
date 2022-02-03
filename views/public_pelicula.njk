@@ -1,0 +1,31 @@
+{% extends "public_base.njk"%}
+
+{% block titulo %}Pelicules | {{ pelicula.titol }}{% endblock %}
+
+{% block contenido%}
+<h1>{{ pelicula.titol }}</h1>
+<h4><small>{{ pelicula.genere }} | {{ pelicula.duracio }} mins</small></h4>
+<p>{{ pelicula.sinopsis }}</p>
+<h4>Director: {{ pelicula.director.nom }}</h4>
+
+{%if pelicula.valoracio %}
+<h4>Valoració: {{ pelicula.valoracio }}</h4>
+{% endif %}
+
+{% if pelicula.imatge and pelicula.imatge !== '' %}
+<div class="mb-3">
+    <img src="/uploads/{{ pelicula.imatge }}" alt="Imatge de {{ pelicula.titol }}" >
+</div>
+{% endif %}
+
+{% if pelicula.plataformes.length > 0 %}
+<h4>Plataformes</h4>
+<ul>
+{% for plataforma in pelicula.plataformes %}
+    <li class="mb-3">{{ plataforma.nom }}</li>
+{% endfor %}
+<ul>
+{% endif %}
+
+<a class="btn btn-success" href="/">Volver</a>
+{% endblock %}

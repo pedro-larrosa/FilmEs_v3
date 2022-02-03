@@ -1,0 +1,20 @@
+{% extends "admin_base.njk"%}
+
+{% block titulo %}Administració{% endblock %}
+
+{% block contenido%}
+<h1 class="centrar">Directors</h1>
+<ul>
+    {% for director in directors %}
+    <li class="mb-3">{{ director.nom }} 
+        <a href="/admin/directors/editar/{{ director.id }}" class="btn btn-primary mx-2">Editar</a>
+         <form action="/admin/directors/{{ director.id }}" method="post" class="d-inline-block">
+            <input type="hidden" name="_method" value="delete" />
+            <button type="submit" class="btn btn-danger">
+                Borrar
+            </button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "public_base.njk"%}
+
+{% block titulo %}Pelicules | ERROR{% endblock %}
+
+{% block contenido%}
+<h1 class="centrar">Error</h1>
+<p class="centrar">{{ error | default("Error en l'aplicació")}}</p>
+{% endblock %}
