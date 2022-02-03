@@ -1,0 +1,38 @@
+{% extends "admin_base.njk" %}
+{% block titulo %}
+{% if director %}
+    Administració | Editar {{ director.nom }}
+{% else %}
+    Administració | Nou director
+{% endif %}
+{% endblock %}
+
+{% block contenido %}
+{% if director %}
+    <h1>Editar {{ director.nom }}</h1>
+{% else %}
+    <h1>Inserció de nou director</h1>
+{% endif %}
+<form action="/admin/directors{% if director %}/{{ director.id }}{% endif %}" method="POST">
+    {% if director %}
+        <input type="hidden" name="_method" value="put" />
+    {% endif %}
+
+    <div class="form-group mb-3">
+        <label for="nom"> Nom:</label>
+        <input required type="text" class="form-control" id="nom" name="nom" minlength="5"
+                placeholder="Nom del director..." value="{{ director.nom }}"/>
+    </div>
+    <div class="form-group mb-3">
+        <label for="anyNaixement"> Any de naixement:</label>
+        <input type="number" class="form-control" id="anyNaixement" name="anyNaixement" min="0"
+                placeholder="Any de naixement del director..." value="{{ director.anyNaixement }}" />
+    </div>
+
+    {% if director %}
+        <button type="submit" class="btn btn-primary">Editar</button>
+    {% else %}
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    {% endif %}
+</form>
+{% endblock %}

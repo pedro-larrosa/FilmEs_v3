@@ -4,6 +4,9 @@
 
 {% block contenido%}
 <h1 class="centrar">Pel·lícules</h1>
+{% if not pelicules or pelicules.length === 0 %}
+<h2 class="centrar">No s'han trobat pel·licules<h2>
+{% endif %}
 <ul>
     {% for pelicula in pelicules %}
     <li class="mb-3">{{ pelicula.titol }} 

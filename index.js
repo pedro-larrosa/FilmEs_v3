@@ -11,6 +11,7 @@ const methodOverride = require('method-override');
 const pelicules = require(__dirname + '/routes/pelicules');
 const public = require(__dirname + '/routes/public');
 const auth = require(__dirname + '/routes/auth');
+const directors = require(__dirname + '/routes/directors');
 
 mongoose.connect('mongodb://localhost:27017/FilmEs_v3', {
   useNewURLParser: true,
@@ -47,6 +48,7 @@ app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(__dirname + '/public'));
 app.use('/admin', pelicules);
+app.use('/admin/directors', directors);
 app.use('/auth', auth);
 app.use('/', public);
 app.get('', (req, res) => {

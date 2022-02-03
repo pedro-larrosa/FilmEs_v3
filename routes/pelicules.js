@@ -27,9 +27,7 @@ router.get('/', autenticacion, (req, res) => {
   Pelicula.find()
     .populate('director')
     .then((resultat) => {
-      if (!resultat || resultat.length === 0)
-        res.render('admin_error', { error: "No s'han trobat pel·lícules" });
-      else res.render('admin_pelicules', { pelicules: resultat });
+      res.render('admin_pelicules', { pelicules: resultat });
     })
     .catch(() => {
       res.render('admin_error');
@@ -168,7 +166,7 @@ router.delete('/pelicules/:id', autenticacion, (req, res) => {
       if (resultado) res.redirect(req.baseUrl);
       else
         res.render('admin_error', {
-          error: "No s'ha trobat el llibre per eliminar"
+          error: "No s'ha trobat la pel·licula per eliminar"
         });
     })
     .catch(() => {

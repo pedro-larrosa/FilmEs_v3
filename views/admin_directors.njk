@@ -1,9 +1,12 @@
 {% extends "admin_base.njk"%}
 
-{% block titulo %}Administració{% endblock %}
+{% block titulo %}Administració | Directors{% endblock %}
 
 {% block contenido%}
 <h1 class="centrar">Directors</h1>
+{% if not directors or directors.length === 0 %}
+<h2 class="centrar">No s'han trobat directors<h2>
+{% endif %}
 <ul>
     {% for director in directors %}
     <li class="mb-3">{{ director.nom }} 
