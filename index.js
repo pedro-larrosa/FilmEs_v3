@@ -33,7 +33,7 @@ app.use(
   })
 );
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded());
 app.use(express.json());
 app.use(
   methodOverride((req, res) => {
@@ -44,6 +44,8 @@ app.use(
     }
   })
 );
+//Utilizo esto porque el methodoverride con el input no me iba al hacer el put con el enctype
+//por lo que meto esta otra función también para que el metodo lo sustituya con el parametro _method en la url
 app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(__dirname + '/public'));

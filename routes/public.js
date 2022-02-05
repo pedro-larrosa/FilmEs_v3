@@ -1,3 +1,7 @@
+/**
+ * En este archivo se establecen las rutas publicas de la aplicación,
+ * que no necesitarán autenticación
+ */
 const express = require('express');
 
 let Pelicula = require(__dirname + '/../models/pelicula.js');

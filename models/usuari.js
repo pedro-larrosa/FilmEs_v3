@@ -1,3 +1,6 @@
+/**
+ * En este archivo se establece el modelo de los usuarios
+ */
 const mongoose = require('mongoose');
 
 let usuariSchema = new mongoose.Schema({

@@ -1,3 +1,7 @@
+/**
+ * En este archivo se establecen las rutas encargadas de los servicios
+ * relacionados con los directores
+ */
 const express = require('express');
 const autenticacion = require('../utils/auth');
 

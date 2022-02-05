@@ -1,3 +1,7 @@
+/**
+ * En este archivo se establecen las rutas relacionadas con la autentificación de la aplicacion
+ * login, logout
+ */
 const express = require('express');
 const SHA256 = require('crypto-js/sha256');
 

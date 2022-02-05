@@ -1,3 +1,6 @@
+/**
+ * Utilidad para generar directores
+ */
 const mongoose = require('mongoose');
 const Director = require(__dirname + '/../models/director');
 mongoose.connect('mongodb://localhost:27017/FilmEs_v3', {
